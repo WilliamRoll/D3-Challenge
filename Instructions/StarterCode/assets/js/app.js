@@ -34,5 +34,13 @@ d3.csv("assets/data/data.csv").then(function(dataVar) {
     .domain([9, d3.max(dataVar, d => d.poverty)])
     .range([0, width]);
 
+  var yLinearScale = d3.scaleLinear()
+    .domain([4, d3.max(dataVar, d => d.healthcare)])
+    .range([height, 0]);
+  
+  //Create axis functions 
+  var bottomAxis = d3.axisBottom(xLinearScale);
+  var leftAxis = d3.axisLeft(yLinearScale);
+
   
 });
