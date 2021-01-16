@@ -42,5 +42,24 @@ d3.csv("assets/data/data.csv").then(function(dataVar) {
   var bottomAxis = d3.axisBottom(xLinearScale);
   var leftAxis = d3.axisLeft(yLinearScale);
 
+  //Append axes to the chart
+  chartGroup.append("g")
+    .attr("transform", `translate(0, ${height})`)
+    .call(bottomAxis);
+
+  chartGroup.append("g")
+    .call(leftAxis);
+
+  //Create circles for the states
+  var circlesGroup = chartGroup.selectAll("circle")
+    .data(dataVar)
+    .enter()
+    .append("circle")
+    .attr("cx", d => xLinearScale(d.poverty))
+    .attr("cy", d => yLinearScale(d.healthcare))
+    .attr("r", "15")
+    .attr("fill", "blue")
+    .attr("opacity", ".5");
+
   
 });
